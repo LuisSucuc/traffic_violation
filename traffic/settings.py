@@ -11,19 +11,37 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env(
+    # set casting, default value
+    DJANGO_DEBUG=(bool, False),
+    DJANGO_SECRET=(str),
+    DJANGO_SUPERUSER_USERNAME=(str),
+    DJANGO_SUPERUSER_EMAIL=(str),
+    DJANGO_SUPERUSER_PASSWORD=(str),
+    POSTGRES_DB=(str),
+    POSTGRES_USER=(str),
+    POSTGRES_PASSWORD=(str),
+    POSTGRES_HOST=(str),
+    POSTGRES_PORT=(int),
+    
+)
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-dp(51yb4wq-)iq-8dua1h7=1yv6_(!pv442j82p6*-a79rgtk5'
+SECRET_KEY = env('DJANGO_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DJANGO_DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -31,6 +49,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'elements',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,11 +94,17 @@ WSGI_APPLICATION = 'traffic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT')
+    },
+    'test': {
+        'NAME': f"test_{env('POSTGRES_DB')}",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

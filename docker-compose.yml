@@ -1,9 +1,5 @@
 version: '3.8'
 
-networks:
-  n5now-network:
-    driver: bridge
-
 services:
   postgres:
     image: postgres:latest
@@ -14,7 +10,7 @@ services:
     env_file:
       - .env
     volumes:
-      - '/var/lib/n5nowdb/data:/var/lib/postgresql/data'
+      - n5now_db_data:/var/lib/postgresql/data
     networks:
       - n5now-network
 
@@ -32,3 +28,12 @@ services:
       - n5now-network
     depends_on:
       - postgres
+
+
+volumes:
+  n5now_db_data:
+
+
+networks:
+  n5now-network:
+    driver: bridge

@@ -20,6 +20,7 @@ COPY . .
 # I added this line to simplify the process of running the Django server for my challenge
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+RUN chmod +x ./sample_data/load_data.sh
 
 # Run the entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]

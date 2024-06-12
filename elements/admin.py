@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Person, Vehicle, Officer, Brand, Color
+from django.contrib.auth.admin import UserAdmin
 
 
 @admin.register(Person)
@@ -25,17 +26,12 @@ class VehicleAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Officer)
-class OfficerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'id_number')
-    search_fields = ('name', 'id_number')
-    list_filter = ('name',)
-
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
     list_filter = ('name',)
+
 
 @admin.register(Color)
 class ColorAdmin(admin.ModelAdmin):
@@ -44,4 +40,45 @@ class ColorAdmin(admin.ModelAdmin):
     list_filter = ('name',)
 
 
+@admin.register(Officer)
+class OfficerAdmin(UserAdmin):
+    # Fields to be displayed in the edit page
+    fieldsets = (
+        (("Personal info"), {"fields": ("name", "username", "email")}),
+        (
+            ("Permissions"),
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups"
+                ),
+            },
+        ),
+        ("Password", {"fields": ("password",)}),
+    )
 
+    # Fields to be displayed in the add page
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": ("name", "email", "username", "password1", "password2", "groups"),
+            },
+        ),
+    )
+
+    def officer_id(self, obj):
+        '''
+        Add a custom field to the list display
+        '''
+        return obj.id
+
+    # Add better description to the id field
+    officer_id.short_description = 'Officer ID'
+
+    # Fields to be displayed in the list page
+    list_display = ("officer_id", "name", "email",
+                    "username", "is_staff", "is_superuser")

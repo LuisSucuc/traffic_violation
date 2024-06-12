@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
 
 
 class Person(models.Model):
@@ -60,15 +62,18 @@ class Vehicle(models.Model):
         return f"{self.plate} - {self.brand}"
 
 
-class Officer(models.Model):
+class Officer(AbstractUser):
     """
     Model that represents an officer.
-    """
+    """  
+    first_name = None
+    last_name = None
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, blank=False, null=False)
     """name: Name of the officer"""
-    id_number = models.CharField(max_length=100, unique=True)
-    """id_number: Unique identification number of the officer"""
 
     def __str__(self):
-        return self.name
+        return self.email
+
+    class Meta:
+        pass

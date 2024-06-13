@@ -9,3 +9,4 @@ python manage.py loaddata /app/sample_data/Officer.json
 python manage.py loaddata /app/sample_data/Group.json
 python manage.py loaddata /app/sample_data/OfficerGroups.json
 python manage.py loaddata /app/sample_data/Infractions.json
+python manage.py user_set_default_password

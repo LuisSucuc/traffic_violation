@@ -14,14 +14,14 @@ class InfractionSerializer(serializers.ModelSerializer):
         fields = ['id', 'vehicle', 'vehicle_plate', 'timestamp', 'comments']
 
 
-class InfractionSerializer(serializers.ModelSerializer):
+class TrafficInfractionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Infraction
         fields = ['timestamp', 'comments']
 
 
 class VehicleInfractionReportSerializer(serializers.ModelSerializer):
-    infractions = InfractionSerializer(many=True)
+    infractions = TrafficInfractionSerializer(many=True)
 
     class Meta:
         model = Vehicle

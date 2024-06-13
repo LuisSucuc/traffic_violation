@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from .models import Infraction, Vehicle
-from .serializers import InfractionSerializer
+from .serializers import InfractionSerializer, TrafficInfractionSerializer
 from .serializers import VehicleInfractionReportSerializer
 from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
@@ -38,8 +38,8 @@ class LoadInfractionView(APIView):
             vehicle = vehicle_query.first()
 
             # Create the infraction
-            infraction = Infraction(
-                vehicle=vehicle, timestamp=timestamp, comments=comments)
+            infraction = Infraction( vehicle=vehicle, timestamp=timestamp,
+                                     comments=comments, officer=request.user)
             infraction.save()
 
             # Return the infraction

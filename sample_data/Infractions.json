@@ -1,0 +1,137 @@
+[
+  {
+    "model": "infractions.infraction",
+    "pk": 1,
+    "fields": {
+      "vehicle": 1,
+      "timestamp": "2023-01-01T08:00:00Z",
+      "comments": "Exceso de velocidad"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 2,
+    "fields": {
+      "vehicle": 1,
+      "timestamp": "2023-01-02T12:30:00Z",
+      "comments": "Estacionamiento indebido"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 3,
+    "fields": {
+      "vehicle": 1,
+      "timestamp": "2023-01-03T17:45:00Z",
+      "comments": "Semáforo en rojo"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 11,
+    "fields": {
+      "vehicle": 1,
+      "timestamp": "2023-01-11T09:45:00Z",
+      "comments": "Estacionamiento indebido frente a una salida de emergencia"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 12,
+    "fields": {
+      "vehicle": 2,
+      "timestamp": "2023-01-12T11:30:00Z",
+      "comments": "Cruzar un semáforo en rojo en una intersección principal"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 13,
+    "fields": {
+      "vehicle": 2,
+      "timestamp": "2023-01-13T14:15:00Z",
+      "comments": "Exceso de velocidad en zona escolar"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 14,
+    "fields": {
+      "vehicle": 2,
+      "timestamp": "2023-01-14T16:00:00Z",
+      "comments": "Estacionamiento indebido en un espacio reservado para discapacitados"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 15,
+    "fields": {
+      "vehicle": 4,
+      "timestamp": "2023-01-15T18:45:00Z",
+      "comments": "Ignorar la señal de alto en un cruce peatonal"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 4,
+    "fields": {
+      "vehicle": 4,
+      "timestamp": "2023-01-04T09:15:00Z",
+      "comments": "Exceso de velocidad"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 5,
+    "fields": {
+      "vehicle": 4,
+      "timestamp": "2023-01-05T10:30:00Z",
+      "comments": "Estacionamiento indebido"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 6,
+    "fields": {
+      "vehicle": 5,
+      "timestamp": "2023-01-06T14:00:00Z",
+      "comments": "Semáforo en rojo"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 7,
+    "fields": {
+      "vehicle": 5,
+      "timestamp": "2023-01-07T16:45:00Z",
+      "comments": "Exceso de velocidad"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 8,
+    "fields": {
+      "vehicle": 6,
+      "timestamp": "2023-01-08T18:30:00Z",
+      "comments": "Estacionamiento indebido"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 9,
+    "fields": {
+      "vehicle": 7,
+      "timestamp": "2023-01-09T11:00:00Z",
+      "comments": "Semáforo en rojo"
+    }
+  },
+  {
+    "model": "infractions.infraction",
+    "pk": 10,
+    "fields": {
+      "vehicle": 8,
+      "timestamp": "2023-01-10T13:30:00Z",
+      "comments": "Exceso de velocidad"
+    }
+  }
+]

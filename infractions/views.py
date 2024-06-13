@@ -1,3 +1,4 @@
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -7,15 +8,16 @@ from .serializers import InfractionSerializer
 from .serializers import VehicleInfractionReportSerializer
 from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
+from infractions.permissions import IsInGroupPermission
 
 
 class LoadInfractionView(APIView):
     """ 
     View to load an infraction into the database.
     """
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsInGroupPermission]
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs) -> Response:
         """
         POST method to load an infraction into the database.
         """
@@ -53,7 +55,11 @@ class GenerateReportView(APIView):
     """
     View to generate a report of the infractions of a person.
     """
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs) -> Response:
+        """
+        GET method to generate a report of the infractions of a person.
+        """
+
         email = request.query_params.get('email')
         # Check if the email is provided
         if not email:

@@ -13,4 +13,4 @@ fi
 
 # Start the Django development server
 echo "Starting server..."
-exec python manage.py runserver 0.0.0.0:8000
+exec gunicorn traffic.wsgi:application --bind 0.0.0.0:8000 --workers 3

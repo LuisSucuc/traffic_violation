@@ -16,6 +16,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy Django project code
 COPY . .
 
+RUN python manage.py collectstatic --noinput
+
 # Copy entrypoint script
 # I added this line to simplify the process of running the Django server for my challenge
 COPY entrypoint.sh /entrypoint.sh

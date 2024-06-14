@@ -226,7 +226,7 @@
             document.getElementById("comentarios").value = "";
           } else {
             console.error("Error:", data);
-            const errorMessage = data.body.error || "Error desconocido";
+            const errorMessage = data.body.error || "Error interno. Verifica los permisos del usuario.";
             document.querySelector(".alert-danger").innerText = errorMessage;
             document.querySelector(".alert-danger").style.display = "block";
           }

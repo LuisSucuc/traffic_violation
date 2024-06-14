@@ -1,13 +1,11 @@
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .models import Infraction, Vehicle
-from .serializers import InfractionSerializer, TrafficInfractionSerializer
-from .serializers import VehicleInfractionReportSerializer
-from django.core.validators import EmailValidator
-from django.core.exceptions import ValidationError
+from .serializers import EmailSerializer, InfraccionSerializerSpanish, InfractionSerializer, VehicleInfractionReportSerializer
+
 from infractions.permissions import IsInGroupPermission
 
 
@@ -20,34 +18,46 @@ class LoadInfractionView(APIView):
     def post(self, request, *args, **kwargs) -> Response:
         """
         POST method to load an infraction into the database.
+
+        Args:
+            request: Request object.
+
+        Returns:
+            Response object.
         """
-        try: 
+        try:
             data = request.data
-            plate = data.get('placa_patente')
-            timestamp = data.get('timestamp')
-            comments = data.get('comentarios')
+            serializer_spanish = InfraccionSerializerSpanish(data=data)
+
+            if not serializer_spanish.is_valid():
+                return Response('Verifica tus datos', errors=serializer_spanish.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            validated_data = serializer_spanish.validated_data
 
             # Check if the vehicle exists
-            vehicle_query = Vehicle.objects.filter(plate=plate)
+            vehicle = Vehicle.objects.filter(
+                plate=validated_data.get('placa_patente')).first()
 
             # If the vehicle does not exist, return an error
-            if not vehicle_query.exists():
+            if not vehicle:
                 return Response({"error": "Vehículo no encontrado"}, status=status.HTTP_404_NOT_FOUND)
-            
+
             # Get the vehicle
-            vehicle = vehicle_query.first()
 
             # Create the infraction
-            infraction = Infraction( vehicle=vehicle, timestamp=timestamp,
-                                     comments=comments, officer=request.user)
+            infraction = Infraction(vehicle=vehicle,
+                                    comments=validated_data.get('comentarios'),
+                                    timestamp=validated_data.get('timestamp'),
+                                    officer=request.user)
             infraction.save()
 
-            # Return the infraction
             serializer = InfractionSerializer(infraction)
+
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         # If an exception not handled occurs, return an internal server error
         except Exception as e:
-            return Response({"error": f"Internal server error: {str(e)}"},
+            print(e)
+            return Response({"error": f"Error interno, contacte al administrador"},
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
@@ -55,38 +65,30 @@ class GenerateReportView(APIView):
     """
     View to generate a report of the infractions of a person.
     """
+
     def get(self, request, *args, **kwargs) -> Response:
         """
         GET method to generate a report of the infractions of a person.
+
+        Args:
+            request: Request object.
+
+        Returns:
+                Response object.
         """
-
-        email = request.query_params.get('email')
-        # Check if the email is provided
-        if not email:
-            return Response({"error": "Email is required"}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Validate the email
         try:
-            validator = EmailValidator()
-            validator(email)
-        except ValidationError:
-            return Response({"error": "Invalid email"}, status=status.HTTP_400_BAD_REQUEST)
-        
-        # Get the vehicles of the person
-        vehicles = Vehicle.objects.filter(
-            person__email=email).prefetch_related('infraction_set')
-        
-        # Create the report data
-        report_data = [
-            {
-                'plate': vehicle.plate,
-                'infractions': vehicle.infraction_set.all()
-            }
-            for vehicle in vehicles
-        ]
+            serializer = EmailSerializer(data=request.query_params)
+            # Check if the email is provided
+            if not serializer.is_valid():
+                return Response({"error": "Correo electrónico inválido"}, status=status.HTTP_400_BAD_REQUEST)
 
-        serializer = VehicleInfractionReportSerializer(report_data, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-            
+            # Get the vehicles of the person
+            vehicles = Vehicle.objects.select_related('brand', 'color').filter(
+                person__email=serializer.validated_data.get("email")).prefetch_related('infraction_set')
 
-            
+            serializer = VehicleInfractionReportSerializer(vehicles, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response({"error": f"Error interno, contacte al administrador"},
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR)

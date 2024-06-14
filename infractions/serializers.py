@@ -11,7 +11,7 @@ class InfractionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Infraction
-        fields = ['id', 'vehicle', 'vehicle_plate', 'timestamp', 'comments']
+        fields = ['id', 'vehicle', 'vehicle_plate', 'timestamp', 'comments', 'officer']
 
 
 class TrafficInfractionSerializer(serializers.ModelSerializer):

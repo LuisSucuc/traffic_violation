@@ -62,7 +62,7 @@ class GenerateReportViewTests(APITestCase):
             url, {'email': 'invalid-email'}, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.data['error'], 'Invalid email')
+        self.assertEqual(response.data['error'], 'Correo electrónico inválido')
 
     def test_generate_report_email_not_provided(self) -> None:
         '''
@@ -73,4 +73,4 @@ class GenerateReportViewTests(APITestCase):
         response = self.client.get(url, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.data['error'], 'Email is required')
+        self.assertEqual(response.data['error'], 'Correo electrónico inválido')

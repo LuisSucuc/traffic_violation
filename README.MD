@@ -1,8 +1,16 @@
-# Inicio de proyecto
+# Infractions Challenge
 
-1. Para iniciar el proyecto se debera de clonar el repositorio.
+- [Iniciar proyecto con docker](#iniciar-challenge-con-docker)
+- [Documentación del sistema](#documentación-del-sistema)
 
-2. Se deberá de crear un archivo `.env` en la raíz del proyecto con los siguientes datos, para mayor facilidad copiar el archivo `.env.example`. A continuación la descripción de las variables de entorno:
+## Iniciar challenge con Docker
+
+1. Prerequisitos
+    1.1 Docker
+
+2. Clonar el repositorio en la carpeta deseada.
+
+3. Crear un archivo `.env` en la raíz del proyecto con los siguientes datos, para mayor facilidad copiar el archivo `.env.example`. A continuación la descripción de las variables de entorno:
 
 | Variable                      | Descripción                                                                 |
 |-------------------------------|-----------------------------------------------------------------------------|
@@ -17,94 +25,60 @@
 | **POSTGRES_USER**             | Nombre de usuario para conectarse a la base de datos PostgreSQL.                                   |
 | **POSTGRES_PASSWORD**         | Contraseña para el usuario de la base de datos PostgreSQL.                                         |
 
-3. Iniciar el proyecto con Docker o Virtualenv. Se recomienda utilizar *Docker* por la facilidad de uso y configuración.
-
-# Docker
-
-Previamente ubicarse en la carpeta del proyecto y ejecutar el siguiente comando:
+Ejecutar el siguiente comando:
 
 ```bash
 docker-compose up -d
 ```
 
-Esto iniciará dos contenedores, uno para la base de datos y otro para la aplicación. Automaticamente se creará un superusuario con los datos del archivo `.env`. El contenedor principal se podrá acceder por medio de la dirreccion `http://localhost:6565`
-
-## Cargar datos de prueba
-
-Se recomienda cargar datos de prueba para facilitar la calificación del challenge. Para cargar los datos de prueba se debe ejecutar el siguiente comando:
+Se recomienda cargar datos de prueba para facilitar la calificación del challenge. Ejecutar el siguiente comando:
 
 ```bash
 docker exec n5now-api /app/sample_data/load_data.sh
 ```
 
-### Usuarios creados
+Esto iniciará dos contenedores, uno para la base de datos y otro para la aplicación. Automaticamente se creará un superusuario con los datos del archivo `.env`. El contenedor principal se podrá acceder por medio de la dirreccion `http://localhost:6565`
+
+### Datos de prueba creados
+
+#### Usuarios
 
 Automáticamente se crearán los siguientes usuarios. Se debe de tomar en cuenta que se utilizará la misma contraseña de la variable `DJANGO_SUPERUSER_PASSWORD` para todos los usuarios, para simplificar la calificación del challenge.
 
 | Username  | Email  | Password | Description |
 |:------------- |:---------------:| -------------:| -------------:|
 | admin         | <admin@admin.com>             | admin | Superusuario (Se crea automáticamente desde que se inicia le proyecto)   |
-| oficial1      | <oficial1@example.com>        | admin | Usuario Ofical, con permisos de reportar infracciones                    |
-| oficial2      | <oficial2@example.com>        | admin | Usuario Ofical, con permisos de reportar infracciones                    |
+| oficial1      | <oficial1@example.com>        | admin | Usuario Oficial, con permisos de reportar infracciones                    |
+| oficial2      | <oficial2@example.com>        | admin | Usuario Oficial, con permisos de reportar infracciones                    |
 
-# Virtualenv
+## Documentación del sistema
 
-Como requisito se debe tener instalado Python 3.8 o superior y pip. Además se deberá de contar con una base de datos PostgreSQL. Para configurar la base de datos se deberá de modificar el archivo `.env` con los datos correspondientes.
-Ejecutar los siguientes comandos:
+### Menu principal
 
-```bash
-# Crear entorno virtual
-python3 -m venv venv
+Dentro del menú principal se mostraran las siguientes opciones
 
-# Activar entorno virtual
-source venv/bin/activate
+![Menu principal](docs/images/options.png)
 
-# Instalar dependencias
-pip install -r requirements.txt
+#### Iniciar sesión como administrador
 
-# Migrar base de datos
-python manage.py migrate
+Utilizar el usuario username: `admin` y password: `admin`. Se mostrará el menú principal de administrador, en donde se podrán administrar Marcas, Colores, Oficiales, Vehículos, Infracciones y Personas.
+![Menu principal](docs/images/admin.png)
 
-# Iniciar servidor
-python manage.py runserver
-```
+#### Consultar infracciones
 
-Para crear un superusuario se debe ejecutar el siguiente comando e ingresar los datos solicitados:
+Se mostrará un formulario para consultar las infracciones de una persona. Se debe de ingresar el correo electrónico de la persona y se mostrarán los vehículos de las personas y las ifracciones que ha cometido. Se podrán utilizar los siguientes usuarios de prueba para consultar las infracciones:
+    - `juan.perez@example.com`
+    - `maria.lopez@example.com`
+    - `carlos.gomez@example.com`
 
-```bash
-python manage.py createsuperuser
-```
+![Menu principal](docs/images/infractions.png)
 
-# Acceder al proyecto
+#### Crear infracción
 
-Para acceder al proyecto se debe abrir un navegador y dirigirse a la siguiente dirección:
+- Iniciar sesion con el usuario `oficial1` o `oficial2` con password `admin`.
+- Se mostrará el token generado al iniciar sesion via JWT, además se activará un formulario para reportar una infracción. Se debe de ingresar la placa del vehículo, la fecha de la infracción y la descripción de la infracción. Se podrán utilizar los siguientes vehículos de prueba para reportar infracciones:
+  - `IJK123` Se reflejará en las infracciones del usuario `juan.perez@example.com`
+  - `LMN456` Se reflejará en las infracciones del usuario `maria.lopez@example.com`
+  - `OPQ789` Se reflejará en las infracciones del usuario `carlos.gomez@example.com`
 
-```bash
-http://localhost:8000
-```
-
-# Cargar datos de prueba
-
-Para cargar datos de prueba se debe ejecutar el siguiente comando:
-
-```bash
-sample_data/load_data.sh
-```
-
-En ambos casos se crearán los siguientes usuarios:
-
-Automáticamente se crearán los siguientes usuarios. Se debe de tomar en cuenta que se utilizará la misma contraseña de la variable `DJANGO_SUPERUSER_PASSWORD` para todos los usuarios, para simplificar la calificación del challenge.
-
-| Username  | Email  | Password | Description |
-|:------------- |:---------------:| -------------:| -------------:|
-| oficial1      | <oficial1@example.com>        | admin | Usuario Ofical, con permisos de reportar infracciones                    |
-| oficial2      | <oficial2@example.com>        | admin | Usuario Ofical, con permisos de reportar infracciones                    |
-
-
-# Supuestos
-
-1. Se asume que el usuario `admin`, quien es el superusuario, es el encargado de crear usuarios, colores, marcas y vehículos, por lo que iniciará sesion en el administrador de Django.
-2. Los usuarios `oficial1` y `oficial2` son los encargados de reportar infracciones, por lo que no tendrán acceso al administrador de Django pero si los permisos necesarios para reportar infracciones.
-3. Se asume que para el cliente es suficiente la interaccion que proporciona el administrador de Django para la administración de los diferentes objetos.
-
-
+![Menu principal](docs/images/create_infraction.png)

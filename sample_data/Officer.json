@@ -3,38 +3,22 @@
     "model": "elements.officer",
     "pk": 2,
     "fields": {
-      "password": "hola",
       "last_login": "2023-01-01T00:00:00Z",
       "is_superuser": false,
-      "is_staff": true,
-      "username": "staffoficial",
-      "email": "staffoficial@example.com",
-      "name": "Staff Oficial"
+      "username": "oficial1",
+      "email": "oficial1@example.com",
+      "name": "Oficial 1 Perez"
     }
   },
   {
     "model": "elements.officer",
     "pk": 3,
     "fields": {
-      "password": "hola",
-      "last_login": "2023-01-01T00:00:00Z",
-      "is_superuser": false,
-      "is_staff": true,
-      "username": "oficial1",
-      "email": "oficial1@example.com",
-      "name": "Daniel Pérez"
-    }
-  },
-  {
-    "model": "elements.officer",
-    "pk": 4,
-    "fields": {
-      "password": "hola",
       "last_login": "2023-01-02T00:00:00Z",
       "is_superuser": false,
       "username": "oficial2",
       "email": "oficial2@example.com",
-      "name": "Sandra Rodríguez"
+      "name": "Oficial 2 Rodriguez"
     }
   }
 ]

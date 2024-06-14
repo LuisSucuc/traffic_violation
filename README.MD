@@ -4,7 +4,7 @@
 - [Iniciar proyecto con Docker](#iniciar-challenge-con-docker)
 - [Documentación del sistema](#documentación-del-sistema)
 - [Supuestos](#supuestos)
-- [Arquitectura en AWS](#arquitectura-en-aws)s
+- [Arquitectura en AWS](#arquitectura-en-aws)
 
 ## Iniciar Challenge con Docker
 
@@ -103,7 +103,7 @@ Se mostrará un formulario para consultar las infracciones de una persona. Ingre
 
 A continuación, se comparte la colección de Postman para probar los endpoints de la API. Utiliza el endpoint de login, y este configurará el token en las variables de entorno para poder utilizar los demás endpoints.
 
-[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://god.gw.postman.com/run-collection/29726010-1cf20694-ba4d-48fd-b372-9f1f8d0c1ec1?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D29726010-1cf20694-ba4d-48fd-b372-9f1f8d0c1ec1%26entityType%3Dcollection%26workspaceId%3Db0c20d96-0b6a-42ce-a188-1e4b26c4d788)
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/29726010-1cf20694-ba4d-48fd-b372-9f1f8d0c1ec1?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D29726010-1cf20694-ba4d-48fd-b372-9f1f8d0c1ec1%26entityType%3Dcollection%26workspaceId%3Db0c20d96-0b6a-42ce-a188-1e4b26c4d788#?env%5BLocal%5D=W3sia2V5IjoibjVfdG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJhbnkiLCJzZXNzaW9uVmFsdWUiOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMGIydGxibDkwZVhCbElqb2lZV05qWlhOeklpd2laWGh3SWpveE56RTRORGt6TlRVeExDSnBZWFFpT2pFM01UZzBNRGN4TlRFc0ltcDBhU0k2SW1GalpHSXhNV1V6TURkbC4uLiIsInNlc3Npb25JbmRleCI6MH0seyJrZXkiOiJuNV9yZWZyZXNoIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiYW55Iiwic2Vzc2lvblZhbHVlIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SjBiMnRsYmw5MGVYQmxJam9pWVdOalpYTnpJaXdpWlhod0lqb3hOekU0TkRrek5UVXhMQ0pwWVhRaU9qRTNNVGcwTURjeE5URXNJbXAwYVNJNkltRmpaR0l4TVdVek1EZGwuLi4iLCJzZXNzaW9uSW5kZXgiOjF9LHsia2V5IjoiYXBpIiwidmFsdWUiOiJodHRwOi8vbG9jYWxob3N0OjY1NjUvYXBpLyIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0Iiwic2Vzc2lvblZhbHVlIjoiaHR0cDovL2xvY2FsaG9zdDo2NTY1L2FwaS8iLCJzZXNzaW9uSW5kZXgiOjJ9XQ==)
 
 ## Supuestos
 

@@ -23,6 +23,7 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
+    path('', include('interface.urls')),
     path('admin/', admin.site.urls),
     path('api/infractions/', include('infractions.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

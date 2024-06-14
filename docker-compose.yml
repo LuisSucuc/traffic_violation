@@ -15,7 +15,7 @@ services:
       - n5now-network
 
   web:
-    build: .
+    image: luissucuc1/traffic_challenge:latest
     container_name: n5now-api
     restart: always
     ports:

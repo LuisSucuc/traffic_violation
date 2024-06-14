@@ -1,3 +1,5 @@
+from django.db.models import Prefetch
+
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -84,7 +86,10 @@ class GenerateReportView(APIView):
 
             # Get the vehicles of the person
             vehicles = Vehicle.objects.select_related('brand', 'color').filter(
-                person__email=serializer.validated_data.get("email")).prefetch_related('infraction_set')
+                person__email=serializer.validated_data.get("email")).prefetch_related(
+                Prefetch('infraction_set',
+                         queryset=Infraction.objects.order_by('-timestamp'))
+            )
 
             serializer = VehicleInfractionReportSerializer(vehicles, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)

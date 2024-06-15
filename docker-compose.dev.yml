@@ -15,11 +15,13 @@ services:
       - n5now-network
 
   web:
-    image: luissucuc1/traffic_challenge:latest
+    build: .
     container_name: n5now-api
     restart: always
     ports:
       - "6565:8000"
+    volumes:
+      - .:/app
     env_file:
       - .env
     networks:

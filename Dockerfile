@@ -16,9 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy Django project code
 COPY . .
 
-# Copy entrypoint script
-# I added this line to simplify the process of running the Django server for my challenge
-COPY entrypoint.sh /entrypoint.sh
+# Grant permissions to the entrypoint  and load_data.sh scripts
 RUN chmod +x /entrypoint.sh
 RUN chmod +x ./sample_data/load_data.sh
 

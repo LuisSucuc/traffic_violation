@@ -17,6 +17,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Grant permissions to the entrypoint  and load_data.sh scripts
+COPY entrypoint.sh /entrypoint.sh
+COPY sample_data/load_data.sh ./sample_data/load_data.sh
 RUN chmod +x /entrypoint.sh
 RUN chmod +x ./sample_data/load_data.sh
 

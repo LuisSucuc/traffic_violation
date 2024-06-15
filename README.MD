@@ -22,7 +22,7 @@ El sistema cuenta con un área administrativa, implementada mediante el administ
 ### Instrucciones
 
 1. Clonar el repositorio en la carpeta deseada.
-2. Crear un archivo `.env` en la raíz del proyecto con los siguientes datos. Para mayor facilidad, copiar el archivo `.env.example. A continuación, se describen las variables de entorno:
+2. Crear un archivo `.env` en la raíz del proyecto con los siguientes datos. Para mayor facilidad, copiar el archivo `.env.example`. A continuación, se describen las variables de entorno:
 
 | Variable                      | Descripción                                                                 |
 |-------------------------------|-----------------------------------------------------------------------------|

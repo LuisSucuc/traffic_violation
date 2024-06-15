@@ -9,10 +9,10 @@
 ## Iniciar Challenge con Docker
 
 ### Prerequisitos
-    1 Docker
+
+1. Docker
 
 ### Instrucciones
-
 
 1. Clonar el repositorio en la carpeta deseada.
 2. Crear un archivo `.env` en la raíz del proyecto con los siguientes datos. Para mayor facilidad, copiar el archivo `.env.example. A continuación, se describen las variables de entorno:
@@ -30,7 +30,6 @@
 | **POSTGRES_USER**             | Nombre de usuario para conectarse a la base de datos PostgreSQL.                                   |
 | **POSTGRES_PASSWORD**         | Contraseña para el usuario de la base de datos PostgreSQL.                                         |
 
-
 Ejecutar el siguiente comando:
 
 ```bash
@@ -39,7 +38,6 @@ docker-compose up -d
 
 ### Cargar Datos de Prueba
 
-
 Para facilitar la calificación del challenge, se recomienda cargar datos de prueba. Ejecutar el siguiente comando:
 
 ```bash
@@ -47,7 +45,6 @@ docker exec n5now-api /app/sample_data/load_data.sh
 ```
 
 Esto iniciará dos contenedores: uno para la base de datos y otro para la aplicación. Automáticamente se creará un superusuario con los datos del archivo `.env`. El contenedor principal estará accesible a través de <http://localhost:6565>.
-
 
 ### Datos de prueba creados
 
@@ -60,6 +57,14 @@ Automáticamente se crearán los siguientes usuarios. Todos los usuarios utiliza
 | admin         | <admin@admin.com>             | admin | Superusuario (se crea automáticamente al iniciar el proyecto)   |
 | oficial1      | <oficial1@example.com>        | admin | UUsuario Oficial con permisos para reportar infracciones                    |
 | oficial2      | <oficial2@example.com>        | admin | Usuario Oficial con permisos para reportar infracciones                    |
+
+### Ejecución de pruebas unitarias
+
+Para ejecutar las pruebas unitarias, ejecutar el siguiente comando:
+
+```bash
+docker exec n5now-api python manage.py test
+```
 
 ## URL Docker Hub
 
@@ -101,9 +106,15 @@ Se mostrará un formulario para consultar las infracciones de una persona. Ingre
 
 ### API via Postman
 
-A continuación, se comparte la colección de Postman para probar los endpoints de la API. Utiliza el endpoint de login, y este configurará el token en las variables de entorno para poder utilizar los demás endpoints.
+También se pueden testear los endpoints mediante Postman. Para ello debes realizar lo siguiente:
+
+- Haz clic en el botón "Run in Postman" para importar la colección. Aqui encontraras datos pre-cargaos para facilitar las pruebas.
 
 [<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/29726010-1cf20694-ba4d-48fd-b372-9f1f8d0c1ec1?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D29726010-1cf20694-ba4d-48fd-b372-9f1f8d0c1ec1%26entityType%3Dcollection%26workspaceId%3Db0c20d96-0b6a-42ce-a188-1e4b26c4d788#?env%5BLocal%5D=W3sia2V5IjoibjVfdG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJhbnkiLCJzZXNzaW9uVmFsdWUiOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMGIydGxibDkwZVhCbElqb2lZV05qWlhOeklpd2laWGh3SWpveE56RTRORGt6TlRVeExDSnBZWFFpT2pFM01UZzBNRGN4TlRFc0ltcDBhU0k2SW1GalpHSXhNV1V6TURkbC4uLiIsInNlc3Npb25JbmRleCI6MH0seyJrZXkiOiJuNV9yZWZyZXNoIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiYW55Iiwic2Vzc2lvblZhbHVlIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SjBiMnRsYmw5MGVYQmxJam9pWVdOalpYTnpJaXdpWlhod0lqb3hOekU0TkRrek5UVXhMQ0pwWVhRaU9qRTNNVGcwTURjeE5URXNJbXAwYVNJNkltRmpaR0l4TVdVek1EZGwuLi4iLCJzZXNzaW9uSW5kZXgiOjF9LHsia2V5IjoiYXBpIiwidmFsdWUiOiJodHRwOi8vbG9jYWxob3N0OjY1NjUvYXBpLyIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0Iiwic2Vzc2lvblZhbHVlIjoiaHR0cDovL2xvY2FsaG9zdDo2NTY1L2FwaS8iLCJzZXNzaW9uSW5kZXgiOjJ9XQ==)
+
+- Seleciona o crea un enviroment, ya que se guardan automáticamente las variables de entorno `n5_token` y `n5_refresh` al iniciar sesión.
+- Inicia sesión utilizando el endpoing  `Login Oficial` en la carpeta `AUTH` para obtener y generar el token.
+- Realiza las pruebas necesarias.
 
 ## Supuestos
 
@@ -114,7 +125,6 @@ A continuación, se comparte la colección de Postman para probar los endpoints 
 - Se utilizará un sistema de autenticación JWT para la autenticación de los usuarios.
 - Actualmente no se tiene un dominio existente para la aplicación.
 - Se dispone de suficiente presupuesto para utilizar los servicios de AWS propuestos.
-
 
 ## Arquitectura en AWS
 

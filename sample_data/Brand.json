@@ -1,0 +1,22 @@
+[
+    { "model": "elements.brand", "pk": 1, "fields": { "name": "Toyota" }},
+    { "model": "elements.brand", "pk": 2, "fields": { "name": "Honda" }},
+    { "model": "elements.brand", "pk": 3, "fields": { "name": "Ford" }},
+    { "model": "elements.brand", "pk": 4, "fields": { "name": "Chevrolet" }},
+    { "model": "elements.brand", "pk": 5, "fields": { "name": "Nissan" }},
+    { "model": "elements.brand", "pk": 6, "fields": { "name": "Mazda" }},
+    { "model": "elements.brand", "pk": 7, "fields": { "name": "Hyundai" }},
+    { "model": "elements.brand", "pk": 8, "fields": { "name": "Volkswagen" }},
+    { "model": "elements.brand", "pk": 9, "fields": { "name": "Kia" }},
+    { "model": "elements.brand", "pk": 10, "fields": { "name": "Subaru" }},
+    { "model": "elements.brand", "pk": 11, "fields": { "name": "BMW" }},
+    { "model": "elements.brand", "pk": 12, "fields": { "name": "Mercedes-Benz" }},
+    { "model": "elements.brand", "pk": 13, "fields": { "name": "Audi" }},
+    { "model": "elements.brand", "pk": 14, "fields": { "name": "Tesla" }},
+    { "model": "elements.brand", "pk": 15, "fields": { "name": "Lexus" }},
+    { "model": "elements.brand", "pk": 16, "fields": { "name": "Jaguar" }},
+    { "model": "elements.brand", "pk": 17, "fields": { "name": "Land Rover" }},
+    { "model": "elements.brand", "pk": 18, "fields": { "name": "Porsche" }},
+    { "model": "elements.brand", "pk": 19, "fields": { "name": "Ferrari" }},
+    { "model": "elements.brand", "pk": 20, "fields": { "name": "Lamborghini" }}
+]

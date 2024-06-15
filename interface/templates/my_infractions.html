@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block content %}
+
+<h2 class="text-center">Consultar Infracciones</h2>
+<form method="POST">
+<div class="row">
+  
+    {% csrf_token %}
+
+    <div class="col-md-2">
+      <label for="email">Correo electrónico:</label>
+    </div>
+    <div class="col-md-4">
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        required
+        value="{{ email }}"
+      />
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary">Consultar</button>
+    </div>
+  
+</div>
+</form>
+
+{% if infractions and email %}
+
+<div class="row mt-4">
+  {% for vehicle in infractions %}
+  <div class="col-6">
+    <div class="card mt-4">
+      <div class="card-header">
+        Placa: <strong>{{ vehicle.plate }}</strong>
+      </div>
+
+      <div class="card-body">
+        <strong>Marca:</strong> {{ vehicle.brand }}<br />
+        <strong>Color:</strong> {{ vehicle.color }}<br />
+      </div>
+
+      <ul class="list-group list-group-flush">
+        {% for infraction in vehicle.infractions %}
+        <li class="list-group-item">
+          {{ infraction.timestamp }} - {{ infraction.comments }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% if not infractions and email %}
+<div class="alert alert-danger" role="alert">Sin resultados</div>
+{% endif %} {% endblock %}

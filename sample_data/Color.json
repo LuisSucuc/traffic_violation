@@ -1,0 +1,22 @@
+[
+  { "model": "elements.color", "pk": 1, "fields": { "name": "Red" } },
+  { "model": "elements.color", "pk": 2, "fields": { "name": "Blue" } },
+  { "model": "elements.color", "pk": 3, "fields": { "name": "Green" } },
+  { "model": "elements.color", "pk": 4, "fields": { "name": "Black" } },
+  { "model": "elements.color", "pk": 5, "fields": { "name": "White" } },
+  { "model": "elements.color", "pk": 6, "fields": { "name": "Silver" } },
+  { "model": "elements.color", "pk": 7, "fields": { "name": "Gray" } },
+  { "model": "elements.color", "pk": 8, "fields": { "name": "Yellow" } },
+  { "model": "elements.color", "pk": 9, "fields": { "name": "Brown" } },
+  { "model": "elements.color", "pk": 10, "fields": { "name": "Purple" } },
+  { "model": "elements.color", "pk": 11, "fields": { "name": "Orange" } },
+  { "model": "elements.color", "pk": 12, "fields": { "name": "Pink" } },
+  { "model": "elements.color", "pk": 13, "fields": { "name": "Gold" } },
+  { "model": "elements.color", "pk": 14, "fields": { "name": "Beige" } },
+  { "model": "elements.color", "pk": 15, "fields": { "name": "Maroon" } },
+  { "model": "elements.color", "pk": 16, "fields": { "name": "Teal" } },
+  { "model": "elements.color", "pk": 17, "fields": { "name": "Navy" } },
+  { "model": "elements.color", "pk": 18, "fields": { "name": "Cyan" } },
+  { "model": "elements.color", "pk": 19, "fields": { "name": "Magenta" } },
+  { "model": "elements.color", "pk": 20, "fields": { "name": "Turquoise" } }
+]

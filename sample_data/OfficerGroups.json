@@ -1,0 +1,18 @@
+[
+  {
+    "model": "elements.officer_groups",
+    "pk": 1,
+    "fields": {
+      "officer_id": 2,
+      "group_id": 1
+    }
+  },
+  {
+    "model": "elements.officer_groups",
+    "pk": 2,
+    "fields": {
+      "officer_id": 3,
+      "group_id": 1
+    }
+  }
+]

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="row">
+    <h1 class="text-center col-md-12">¿Qué deseas hacer?</h1>
+    <div class="col-md-12 mt-4 text-center">
+        <a href="{% url 'admin:index' %}" class="btn btn-primary">
+            <i class="fas fa-user-shield"></i> Iniciar sesión como administrador
+        </a>
+    </div>
+    <div class="col-md-12 mt-4 text-center">
+        <a href="{% url 'my_infractions' %}" class="btn btn-secondary">
+            <i class="fas fa-search"></i> Consultar infracciones
+        </a>
+    </div>
+    <div class="col-md-12 mt-4 text-center">
+        <a href="{% url 'create_infraction' %}" class="btn btn-info">
+            <i class="fas fa-plus"></i> Crear infracciones
+        </a>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+{% endblock %}

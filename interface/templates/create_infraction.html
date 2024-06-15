@@ -1,0 +1,242 @@
+{% extends "base.html" %} {%block content %}
+<h2 class="text-center">Crear infracción</h2>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-center">Iniciar sesión</h5>
+
+        {% if error %}
+
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          role="alert"
+        >
+          Datos inválidos
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        {% endif %}
+
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="username">Usuario:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              name="username"
+              required
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="password">Contraseña:</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Ingresar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {% if token %}
+  <div class="col-md-6">
+    <p>Bienvenido <strong>{{username}}</strong> este es el token obtenido</p>
+    <p>
+      <small><code>{{token}}</code></small>
+    </p>
+  </div>
+
+  {% endif %}
+</div>
+<br />
+
+{% if token %}
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Nueva infracción</h2>
+
+      <div
+        class="alert alert-warning alert-dismissible fade show"
+        role="alert"
+        style="display: none"
+      >
+        <strong>¡Creado!</strong> Infracción creada existosamente, puede
+        continuar con la siguiente infracción
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div
+        class="alert alert-danger alert-dismissible fade show"
+        role="alert"
+        style="display: none"
+      >
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <form id="createInfraction">
+        <div class="mb-3 row">
+          <label for="placaPatente" class="col-sm-3 col-form-label"
+            >Placa</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              id="placaPatente"
+              placeholder="Ingrese la placa o patente"
+              required
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="timestamp" class="col-sm-3 col-form-label"
+            >Fecha y Hora</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="timestamp"
+              required
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="comentarios" class="col-sm-3 col-form-label"
+            >Comentarios</label
+          >
+          <div class="col-sm-9">
+            <textarea
+              class="form-control"
+              id="comentarios"
+              rows="5"
+              placeholder="Ingrese comentarios"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <div class="col-sm-2 offset-sm-10">
+            <button type="submit" class="btn btn-primary">
+              Crear infracción
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+<script>
+
+  const host = window.location.origin;
+  // Function to get the current date and time in ISO format
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    const currentDateTime = now.toISOString().slice(0, 16);
+    return currentDateTime;
+  };
+
+  // Function to get and validate form values
+  const getFormValues = () => {
+    const licensePlate = document.getElementById("placaPatente").value;
+    const timestamp = document.getElementById("timestamp").value;
+    const comments = document.getElementById("comentarios").value;
+
+    if (!licensePlate || !timestamp || !comments) {
+      alert("Por favor, complete todos los campos");
+      return null;
+    }
+
+    return { licensePlate, timestamp, comments };
+  };
+
+  // Set the current date and time when the page loads
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("timestamp").value = getCurrentDateTime();
+  });
+
+  document
+    .getElementById("createInfraction")
+    .addEventListener("submit", (event) => {
+      document.querySelector(".alert-danger").style.display = "none";
+      document.querySelector(".alert-warning").style.display = "none";
+
+      event.preventDefault();
+
+      const formValues = getFormValues();
+      if (!formValues) return;
+
+      const { licensePlate, timestamp, comments } = formValues;
+
+      // Create data object
+      const data = {
+        placa_patente: licensePlate,
+        timestamp: timestamp,
+        comentarios: comments,
+      };
+
+      const token = "{{token.access}}";
+
+      fetch(`${host}/api/infractions/cargar_infraccion/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) =>
+          response
+            .json()
+            .then((data) => ({ status: response.status, body: data }))
+        )
+        .then((data) => {
+          if (data.status === 202) {
+            // Success response
+            document.querySelector(".alert-warning").style.display = "block";
+            document.getElementById("placaPatente").value = "";
+            document.getElementById("timestamp").value = getCurrentDateTime();
+            document.getElementById("comentarios").value = "";
+          } else {
+            console.error("Error:", data);
+            const errorMessage = data.body.error || "Error interno. Verifica los permisos del usuario.";
+            document.querySelector(".alert-danger").innerText = errorMessage;
+            document.querySelector(".alert-danger").style.display = "block";
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Error interno " + error.message);
+        });
+    });
+</script>
+
+{% endblock %}

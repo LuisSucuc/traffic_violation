@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: n5now-db
+    restart: always
+    ports:
+      - "6564:5432"
+    env_file:
+      - .env
+    volumes:
+      - n5now_db_data:/var/lib/postgresql/data
+    networks:
+      - n5now-network
+
+  web:
+    image: luissucuc1/traffic_challenge:latest
+    container_name: n5now-api
+    restart: always
+    ports:
+      - "6565:8000"
+    env_file:
+      - .env
+    networks:
+      - n5now-network
+    depends_on:
+      - postgres
+
+
+volumes:
+  n5now_db_data:
+
+
+networks:
+  n5now-network:
+    driver: bridge

@@ -1,10 +1,17 @@
 # Infractions Challenge
 
+- [Descripción del proyecto](#descripción-del-proyecto)
 - [Repositorio GitHub](https://github.com/LuisSucuc/traffic_violation)
 - [Iniciar proyecto con Docker](#iniciar-challenge-con-docker)
 - [Documentación del sistema](#documentación-del-sistema)
 - [Supuestos](#supuestos)
 - [Arquitectura en AWS](#arquitectura-en-aws)
+
+## Descripción del Proyecto
+
+El presente proyecto constituye la resolución del desafío de N5 Now. Este proyecto incluye un sistema básico para la administración de elementos de tránsito, como vehículos, personas, oficiales e infracciones. El sistema está desarrollado utilizando Django y Django Rest Framework, y está conectado a una base de datos PostgreSQL. Todo esto se encuentra empaquetado en contenedores Docker.
+
+El sistema cuenta con un área administrativa, implementada mediante el administrador de Django, y un área destinada a la consulta y creación de infracciones, para la cual se desarrollaron servicios utilizando Django Rest Framework. El área de infracciones puede ser consultada a través de una interfaz gráfica creada en Django o mediante solicitudes en una colección pública de Postman
 
 ## Iniciar Challenge con Docker
 
